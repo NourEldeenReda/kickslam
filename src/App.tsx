@@ -2,12 +2,8 @@ import { useState } from "react";
 import ProductCard from "./components/ProductCard";
 import Cart from "./components/Cart";
 import type { Product, CartItem } from "./types";
-
-const products: Product[] = [
-  { id: 1, name: "Air Monarch", brand: "Nike", price: 120 },
-  { id: 2, name: "Superstar", brand: "Adidas", price: 100 },
-  { id: 3, name: "Suede Classic", brand: "Puma", price: 90 },
-];
+import { products } from "./data/products";
+import { finalPrice } from "./utils";
 
 function App() {
   const [cart, setCart] = useState<CartItem[]>([]);
@@ -31,7 +27,7 @@ function App() {
   }
 
   const total = cart.reduce(
-    (sum, item) => sum + item.product.price * item.quantity,
+    (sum, item) => sum + finalPrice(item.product) * item.quantity,
     0,
   );
 

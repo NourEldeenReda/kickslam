@@ -1,4 +1,5 @@
 import type { CartItem } from "../types";
+import { finalPrice, formatPrice } from "../utils";
 
 type Props = {
   items: CartItem[];
@@ -18,14 +19,14 @@ function Cart({ items, total, onRemove }: Props) {
             <span>
               {product.name} × {quantity}
             </span>
-            <span>${product.price * quantity}</span>
+            <span>{formatPrice(finalPrice(product) * quantity)}</span>
             <button className="remove" onClick={() => onRemove(product.id)}>
               Remove
             </button>
           </li>
         ))}
       </ul>
-      <p className="cart-total">Total: ${total}</p>
+      <p className="cart-total">Total: {formatPrice(total)}</p>
     </section>
   );
 }
