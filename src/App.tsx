@@ -26,6 +26,18 @@ function App() {
     setCart((current) => current.filter((item) => item.product.id !== id));
   }
 
+  function changeQuantity(id: number, change: number) {
+    setCart((current) =>
+      current
+        .map((item) =>
+          item.product.id === id
+            ? { ...item, quantity: item.quantity + change }
+            : item,
+        )
+        .filter((item) => item.quantity > 0),
+    );
+  }
+
   const total = cart.reduce(
     (sum, item) => sum + finalPrice(item.product) * item.quantity,
     0,
@@ -34,7 +46,12 @@ function App() {
   return (
     <main>
       <h1>Kickslam</h1>
-      <Cart items={cart} total={total} onRemove={removeFromCart} />
+      <Cart
+        items={cart}
+        total={total}
+        onChangeQuantity={changeQuantity}
+        onRemove={removeFromCart}
+      />
       <div className="grid">
         {products.map((p) => (
           <ProductCard key={p.id} product={p} onAdd={addToCart} />

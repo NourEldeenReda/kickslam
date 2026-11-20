@@ -4,10 +4,11 @@ import { finalPrice, formatPrice } from "../utils";
 type Props = {
   items: CartItem[];
   total: number;
+  onChangeQuantity: (id: number, change: number) => void;
   onRemove: (id: number) => void;
 };
 
-function Cart({ items, total, onRemove }: Props) {
+function Cart({ items, total, onChangeQuantity, onRemove }: Props) {
   if (items.length === 0) return <p>Your cart is empty.</p>;
 
   return (
@@ -16,10 +17,28 @@ function Cart({ items, total, onRemove }: Props) {
       <ul>
         {items.map(({ product, quantity }) => (
           <li key={product.id}>
-            <span>
-              {product.name} × {quantity}
+            <span>{product.name}</span>
+
+            <div className="qty">
+              <button
+                aria-label={`Decrease ${product.name}`}
+                onClick={() => onChangeQuantity(product.id, -1)}
+              >
+                −
+              </button>
+              <span>{quantity}</span>
+              <button
+                aria-label={`Increase ${product.name}`}
+                onClick={() => onChangeQuantity(product.id, 1)}
+              >
+                +
+              </button>
+            </div>
+
+            <span className="cart-line-price">
+              {formatPrice(finalPrice(product) * quantity)}
             </span>
-            <span>{formatPrice(finalPrice(product) * quantity)}</span>
+
             <button className="remove" onClick={() => onRemove(product.id)}>
               Remove
             </button>
