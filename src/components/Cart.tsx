@@ -13,7 +13,6 @@ function Cart({ items, total, onChangeQuantity, onRemove }: Props) {
 
   return (
     <section className="cart">
-      <h2>Your cart</h2>
       <ul>
         {items.map(({ product, quantity }) => (
           <li key={product.id}>

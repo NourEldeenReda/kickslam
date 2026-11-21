@@ -304,3 +304,42 @@ button {
   gap: 8px;
   margin-bottom: 12px;
 }
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  background: white;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.site-header .logo {
+  font-size: 24px;
+  font-weight: 800;
+  color: #111;
+  text-decoration: none;
+}
+
+.site-header nav {
+  display: flex;
+  gap: 8px;
+}
+
+.site-header nav a {
+  padding: 8px 14px;
+  border-radius: 8px;
+  color: #6d28d9;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.site-header nav a.active {
+  background: #ede9fe;
+}
+
+.page-title {
+  margin: 0 0 16px;
+}
