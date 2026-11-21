@@ -8,19 +8,31 @@ function Layout() {
     <>
       <header className="site-header">
         <NavLink to="/" className="logo">
-          Kickslam
+          Kick<span>slam</span>
         </NavLink>
         <nav>
           <NavLink to="/" end>
             Shop
           </NavLink>
-          <NavLink to="/wishlist">♥ Wishlist ({wishlist.length})</NavLink>
-          <NavLink to="/cart">Cart ({cartCount})</NavLink>
+          <NavLink to="/wishlist">
+            ♥ Wishlist
+            {wishlist.length > 0 && (
+              <span className="badge">{wishlist.length}</span>
+            )}
+          </NavLink>
+          <NavLink to="/cart">
+            Cart
+            {cartCount > 0 && <span className="badge">{cartCount}</span>}
+          </NavLink>
         </nav>
       </header>
       <main>
         <Outlet />
       </main>
+      <footer className="site-footer">
+        © {new Date().getFullYear()} Kickslam · A demo store, no real orders are
+        placed.
+      </footer>
     </>
   );
 }

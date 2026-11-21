@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import ProductCard from "../components/ProductCard";
 import Filters from "../components/Filters";
 import { products } from "../data/products";
+import Hero from "../components/Hero";
 import {
   defaultFilters,
   filterProducts,
@@ -15,25 +16,32 @@ function ShopPage() {
   const visible = useMemo(() => filterProducts(products, filters), [filters]);
 
   return (
-    <div className="shop-layout">
-      <aside className="sidebar">
-        <Filters products={products} filters={filters} onChange={setFilters} />
-      </aside>
+    <>
+      <Hero />
+      <div className="shop-layout">
+        <aside className="sidebar">
+          <Filters
+            products={products}
+            filters={filters}
+            onChange={setFilters}
+          />
+        </aside>
 
-      <section className="shop-main">
-        {visible.length === 0 && <p>No shoes match your filters.</p>}
-        <div className="grid">
-          {visible.map((p) => (
-            <ProductCard
-              key={p.id}
-              product={p}
-              wished={wishlist.includes(p.id)}
-              onToggleWish={toggleWishlist}
-            />
-          ))}
-        </div>
-      </section>
-    </div>
+        <section className="shop-main">
+          {visible.length === 0 && <p>No shoes match your filters.</p>}
+          <div className="grid">
+            {visible.map((p) => (
+              <ProductCard
+                key={p.id}
+                product={p}
+                wished={wishlist.includes(p.id)}
+                onToggleWish={toggleWishlist}
+              />
+            ))}
+          </div>
+        </section>
+      </div>
+    </>
   );
 }
 
