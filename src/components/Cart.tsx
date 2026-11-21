@@ -17,9 +17,13 @@ function Cart({ items, total, onChangeQuantity, onRemove }: Props) {
       <ul>
         {items.map(({ product, size, quantity }) => (
           <li key={`${product.id}-${size}`}>
-            <span>
+            <Link to={`/product/${product.id}`} className="cart-thumb">
+              <img src={product.image} alt={product.name} />
+            </Link>
+
+            <span className="cart-name">
               <Link to={`/product/${product.id}`}>{product.name}</Link>
-              <small className="cart-size"> · Size {size}</small>
+              <small className="cart-size">Size {size}</small>
             </span>
 
             <div className="qty">

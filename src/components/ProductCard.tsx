@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { Link } from "react-router";
+import QuickAdd from "./QuickAdd";
 import type { Product } from "../types";
 import { finalPrice, formatPrice } from "../utils";
 
@@ -9,6 +11,7 @@ type Props = {
 };
 
 function ProductCard({ product, wished, onToggleWish }: Props) {
+  const [quickAddOpen, setQuickAddOpen] = useState(false);
   const onSale = product.discount > 0;
   const url = `/product/${product.id}`;
 
@@ -44,9 +47,11 @@ function ProductCard({ product, wished, onToggleWish }: Props) {
           <span className="card-discount">{product.discount}% off</span>
         )}
       </p>
-      <Link to={url} className="button">
-        Select size
-      </Link>
+      <button onClick={() => setQuickAddOpen(true)}>Add to cart</button>
+
+      {quickAddOpen && (
+        <QuickAdd product={product} onClose={() => setQuickAddOpen(false)} />
+      )}
     </div>
   );
 }

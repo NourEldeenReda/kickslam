@@ -24,13 +24,13 @@
 
 ## Phase 3: Fresh design
 
+- [ ] Card button says "Add to cart" and opens a quick-add popup (photo, name, size picker, price, Cancel / Add to cart, link to full details)
+- [ ] Show the product image on each cart line, not just the title
 - [ ] Header with logo, search, cart and wishlist counters
 - [ ] Hero banner and footer
 - [ ] Consistent colours and fonts
 - [ ] Mobile-friendly layout
 - [ ] Loading and empty states
-- [ ] Card button says "Add to cart" and opens a quick-add popup (photo, name, size picker, price, Cancel / Add to cart, link to full details)
-- [ ] Show the product image on each cart line, not just the title
 
 ## Phase 4: Backend with Supabase
 
