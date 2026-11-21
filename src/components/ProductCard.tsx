@@ -4,14 +4,28 @@ import { finalPrice, formatPrice } from "../utils";
 type Props = {
   product: Product;
   onAdd: (product: Product) => void;
+  wished: boolean;
+  onToggleWish: (id: number) => void;
 };
 
-function ProductCard({ product, onAdd }: Props) {
+function ProductCard({ product, onAdd, wished, onToggleWish }: Props) {
   const onSale = product.discount > 0;
 
   return (
     <div className="card">
       <div className="card-image">
+        <button
+          className={`wish ${wished ? "wish-on" : ""}`}
+          aria-label={
+            wished
+              ? `Remove ${product.name} from wishlist`
+              : `Add ${product.name} to wishlist`
+          }
+          aria-pressed={wished}
+          onClick={() => onToggleWish(product.id)}
+        >
+          {wished ? "♥" : "♡"}
+        </button>
         <img src={product.image} alt={product.name} />
       </div>
       <p className="card-brand">{product.brand}</p>

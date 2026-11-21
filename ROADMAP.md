@@ -10,17 +10,17 @@
 
 ## Phase 1: Finish the storefront on local data
 
-- [ ] Search and filters (category, brand, colour)
-- [ ] Sort by price and price range filter
-- [ ] Size filter (needs sizes added to the data)
-- [ ] Cart saved in localStorage
-- [ ] Wishlist (heart button on each card)
+- [x] Search and filters (category, brand, colour)
+- [x] Sort by price and price range filter
+- [x] Cart saved in localStorage
+- [x] Wishlist (heart button on each card)
 
 ## Phase 2: Real pages and shared state
 
 - [ ] React Router (shop, product details, cart, wishlist, login)
 - [ ] Shared cart and wishlist state (Context or Zustand)
 - [ ] Product detail page with size picker
+- [ ] Size picker on the product page (needs sizes added to the data)
 
 ## Phase 3: Fresh design
 

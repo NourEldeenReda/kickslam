@@ -5,14 +5,11 @@ body {
 }
 
 main {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 24px;
+  padding: 0 16px;
 }
-
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 20px;
 }
 
@@ -24,6 +21,7 @@ main {
 }
 
 .card-image {
+  position: relative;
   background: #fff;
   border-radius: 8px;
   height: 180px;
@@ -155,4 +153,154 @@ button {
 .cart-line-price {
   min-width: 80px;
   text-align: right;
+}
+
+.shop-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.sidebar {
+  flex: 0 0 220px;
+  position: sticky;
+  top: 16px;
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+  padding: 2px 4px 2px 2px;
+  scrollbar-width: thin;
+  scrollbar-color: #c4b5fd transparent;
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: #c4b5fd;
+  border-radius: 999px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: #6d28d9;
+}
+
+.shop-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.sidebar .filters {
+  margin: 0;
+}
+
+@media (max-width: 800px) {
+  .shop-layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    flex: none;
+    width: 100%;
+    position: static;
+    max-height: none;
+  }
+}
+
+.filters {
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.filter-search {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 16px;
+  border: 1px solid #d4d4d8;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.filter-group {
+  border: none;
+  padding: 0;
+  margin: 0 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.filter-group legend {
+  font-weight: 700;
+  margin-bottom: 8px;
+  padding: 0;
+}
+
+.filter-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+
+.filter-group input[type="number"],
+.filter-group select {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #d4d4d8;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.filter-reset {
+  width: 100%;
+  padding: 10px 16px;
+  background: transparent;
+  border: 1px solid #6d28d9;
+  color: #6d28d9;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.filter-group.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.filter-group.two-col legend {
+  grid-column: 1 / -1;
+}
+
+.card .wish {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 36px;
+  height: 36px;
+  margin: 0;
+  padding: 0;
+  border-radius: 50%;
+  background: white;
+  color: #6d28d9;
+  font-size: 20px;
+  line-height: 1;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.card .wish-on {
+  color: #dc2626;
+}
+
+.wish-only {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
 }
