@@ -7,7 +7,7 @@ import { StoreContext, type StoreValue } from "./StoreContext";
 
 export function StoreProvider({ children }: { children: ReactNode }) {
   const [entries, setEntries] = useLocalStorage<CartEntry[]>(
-    "kickslam-cart-v2",
+    "kickslam-cart-v3",
     [],
   );
   const [wishlist, setWishlist] = useLocalStorage<number[]>(
@@ -19,7 +19,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     () =>
       entries.flatMap((entry) => {
         const product = products.find((p) => p.id === entry.productId);
-        return product ? [{ product, quantity: entry.quantity }] : [];
+        return product
+          ? [{ product, size: entry.size, quantity: entry.quantity }]
+          : [];
       }),
     [entries],
   );
@@ -30,27 +32,35 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   );
   const cartCount = items.reduce((count, item) => count + item.quantity, 0);
 
-  function addToCart(product: Product) {
+  function addToCart(product: Product, size: number) {
     setEntries((current) => {
-      const existing = current.find((e) => e.productId === product.id);
+      const existing = current.find(
+        (e) => e.productId === product.id && e.size === size,
+      );
       if (existing) {
         return current.map((e) =>
-          e.productId === product.id ? { ...e, quantity: e.quantity + 1 } : e,
+          e.productId === product.id && e.size === size
+            ? { ...e, quantity: e.quantity + 1 }
+            : e,
         );
       }
-      return [...current, { productId: product.id, quantity: 1 }];
+      return [...current, { productId: product.id, size, quantity: 1 }];
     });
   }
 
-  function removeFromCart(id: number) {
-    setEntries((current) => current.filter((e) => e.productId !== id));
+  function removeFromCart(id: number, size: number) {
+    setEntries((current) =>
+      current.filter((e) => !(e.productId === id && e.size === size)),
+    );
   }
 
-  function changeQuantity(id: number, change: number) {
+  function changeQuantity(id: number, size: number, change: number) {
     setEntries((current) =>
       current
         .map((e) =>
-          e.productId === id ? { ...e, quantity: e.quantity + change } : e,
+          e.productId === id && e.size === size
+            ? { ...e, quantity: e.quantity + change }
+            : e,
         )
         .filter((e) => e.quantity > 0),
     );

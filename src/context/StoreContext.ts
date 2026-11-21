@@ -6,9 +6,9 @@ export type StoreValue = {
   total: number;
   cartCount: number;
   wishlist: number[];
-  addToCart: (product: Product) => void;
-  removeFromCart: (id: number) => void;
-  changeQuantity: (id: number, change: number) => void;
+  addToCart: (product: Product, size: number) => void;
+  removeFromCart: (id: number, size: number) => void;
+  changeQuantity: (id: number, size: number, change: number) => void;
   toggleWishlist: (id: number) => void;
 };
 

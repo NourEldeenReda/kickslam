@@ -10,7 +10,7 @@ import {
 import { useStore } from "../context/useStore";
 
 function ShopPage() {
-  const { wishlist, addToCart, toggleWishlist } = useStore();
+  const { wishlist, toggleWishlist } = useStore();
   const [filters, setFilters] = useState<FiltersState>(defaultFilters);
   const visible = useMemo(() => filterProducts(products, filters), [filters]);
 
@@ -27,7 +27,6 @@ function ShopPage() {
             <ProductCard
               key={p.id}
               product={p}
-              onAdd={addToCart}
               wished={wishlist.includes(p.id)}
               onToggleWish={toggleWishlist}
             />

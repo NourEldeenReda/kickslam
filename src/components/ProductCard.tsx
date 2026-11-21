@@ -1,15 +1,16 @@
+import { Link } from "react-router";
 import type { Product } from "../types";
 import { finalPrice, formatPrice } from "../utils";
 
 type Props = {
   product: Product;
-  onAdd: (product: Product) => void;
   wished: boolean;
   onToggleWish: (id: number) => void;
 };
 
-function ProductCard({ product, onAdd, wished, onToggleWish }: Props) {
+function ProductCard({ product, wished, onToggleWish }: Props) {
   const onSale = product.discount > 0;
+  const url = `/product/${product.id}`;
 
   return (
     <div className="card">
@@ -26,10 +27,14 @@ function ProductCard({ product, onAdd, wished, onToggleWish }: Props) {
         >
           {wished ? "♥" : "♡"}
         </button>
-        <img src={product.image} alt={product.name} />
+        <Link to={url} className="card-image-link">
+          <img src={product.image} alt={product.name} />
+        </Link>
       </div>
       <p className="card-brand">{product.brand}</p>
-      <h3 className="card-name">{product.name}</h3>
+      <h3 className="card-name">
+        <Link to={url}>{product.name}</Link>
+      </h3>
       <p className="card-price">
         {onSale && (
           <span className="price-old">{formatPrice(product.price)}</span>
@@ -39,7 +44,9 @@ function ProductCard({ product, onAdd, wished, onToggleWish }: Props) {
           <span className="card-discount">{product.discount}% off</span>
         )}
       </p>
-      <button onClick={() => onAdd(product)}>Add to cart</button>
+      <Link to={url} className="button">
+        Select size
+      </Link>
     </div>
   );
 }

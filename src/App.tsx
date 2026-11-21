@@ -3,7 +3,7 @@ import Layout from "./components/Layout";
 import ShopPage from "./pages/ShopPage";
 import CartPage from "./pages/CartPage";
 import WishlistPage from "./pages/WishlistPage";
-
+import ProductPage from "./pages/ProductPage";
 function App() {
   return (
     <Routes>
@@ -11,6 +11,7 @@ function App() {
         <Route index element={<ShopPage />} />
         <Route path="wishlist" element={<WishlistPage />} />
         <Route path="cart" element={<CartPage />} />
+        <Route path="product/:id" element={<ProductPage />} />
         <Route
           path="*"
           element={

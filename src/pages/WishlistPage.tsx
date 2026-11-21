@@ -4,7 +4,7 @@ import { products } from "../data/products";
 import { useStore } from "../context/useStore";
 
 function WishlistPage() {
-  const { wishlist, addToCart, toggleWishlist } = useStore();
+  const { wishlist, toggleWishlist } = useStore();
   const saved = products.filter((p) => wishlist.includes(p.id));
 
   return (
@@ -21,7 +21,6 @@ function WishlistPage() {
             <ProductCard
               key={p.id}
               product={p}
-              onAdd={addToCart}
               wished
               onToggleWish={toggleWishlist}
             />

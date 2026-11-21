@@ -17,10 +17,10 @@
 
 ## Phase 2: Real pages and shared state
 
-- [ ] React Router (shop, product details, cart, wishlist, login)
-- [ ] Shared cart and wishlist state (Context or Zustand)
-- [ ] Product detail page with size picker
-- [ ] Size picker on the product page (needs sizes added to the data)
+- [x] React Router (shop, product details, cart, wishlist, login)
+- [x] Shared cart and wishlist state (Context or Zustand)
+- [x] Product detail page with size picker
+- [x] Size picker on the product page (needs sizes added to the data)
 
 ## Phase 3: Fresh design
 
@@ -29,6 +29,8 @@
 - [ ] Consistent colours and fonts
 - [ ] Mobile-friendly layout
 - [ ] Loading and empty states
+- [ ] Card button says "Add to cart" and opens a quick-add popup (photo, name, size picker, price, Cancel / Add to cart, link to full details)
+- [ ] Show the product image on each cart line, not just the title
 
 ## Phase 4: Backend with Supabase
 
