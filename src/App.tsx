@@ -1,74 +1,39 @@
 import { useMemo, useState } from "react";
 import ProductCard from "./components/ProductCard";
 import Cart from "./components/Cart";
-import type { Product, CartItem } from "./types";
+import Filters from "./components/Filters";
 import { products } from "./data/products";
 import {
   defaultFilters,
   filterProducts,
-  finalPrice,
   type Filters as FiltersState,
 } from "./utils";
-import { useLocalStorage } from "./hooks/useLocalStorage";
-import Filters from "./components/Filters";
+import { useStore } from "./context/useStore";
 
 function App() {
-  const [cart, setCart] = useLocalStorage<CartItem[]>("kickslam-cart", []);
+  const {
+    items,
+    total,
+    wishlist,
+    addToCart,
+    removeFromCart,
+    changeQuantity,
+    toggleWishlist,
+  } = useStore();
+
   const [filters, setFilters] = useState<FiltersState>(defaultFilters);
-  const [wishlist, setWishlist] = useLocalStorage<number[]>(
-    "kickslam-wishlist",
-    [],
-  );
   const [showWishlistOnly, setShowWishlistOnly] = useState(false);
+
   const visible = useMemo(() => filterProducts(products, filters), [filters]);
   const shown = showWishlistOnly
     ? visible.filter((p) => wishlist.includes(p.id))
     : visible;
 
-  function addToCart(product: Product) {
-    setCart((current) => {
-      const existing = current.find((item) => item.product.id === product.id);
-      if (existing) {
-        return current.map((item) =>
-          item.product.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item,
-        );
-      }
-      return [...current, { product, quantity: 1 }];
-    });
-  }
-  function toggleWishlist(id: number) {
-    setWishlist((current) =>
-      current.includes(id) ? current.filter((x) => x !== id) : [...current, id],
-    );
-  }
-  function removeFromCart(id: number) {
-    setCart((current) => current.filter((item) => item.product.id !== id));
-  }
-
-  function changeQuantity(id: number, change: number) {
-    setCart((current) =>
-      current
-        .map((item) =>
-          item.product.id === id
-            ? { ...item, quantity: item.quantity + change }
-            : item,
-        )
-        .filter((item) => item.quantity > 0),
-    );
-  }
-
-  const total = cart.reduce(
-    (sum, item) => sum + finalPrice(item.product) * item.quantity,
-    0,
-  );
-
   return (
     <main>
       <h1>Kickslam</h1>
       <Cart
-        items={cart}
+        items={items}
         total={total}
         onChangeQuantity={changeQuantity}
         onRemove={removeFromCart}

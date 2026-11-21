@@ -15,3 +15,7 @@ export type CartItem = {
   product: Product;
   quantity: number;
 };
+export type CartEntry = {
+  productId: number;
+  quantity: number;
+};
