@@ -1,8 +1,9 @@
 import { NavLink, Outlet } from "react-router";
 import { useStore } from "../context/useStore";
-
+import { useAuth } from "../context/useAuth";
 function Layout() {
   const { cartCount, wishlist } = useStore();
+  const { user, signOut } = useAuth();
 
   return (
     <>
@@ -24,6 +25,18 @@ function Layout() {
             Cart
             {cartCount > 0 && <span className="badge">{cartCount}</span>}
           </NavLink>
+          {user ? (
+            <button
+              type="button"
+              className="nav-button"
+              title={user.email ?? undefined}
+              onClick={signOut}
+            >
+              Log out
+            </button>
+          ) : (
+            <NavLink to="/login">Log in</NavLink>
+          )}
         </nav>
       </header>
       <main>

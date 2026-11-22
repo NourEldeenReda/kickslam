@@ -4,6 +4,7 @@ import ShopPage from "./pages/ShopPage";
 import CartPage from "./pages/CartPage";
 import WishlistPage from "./pages/WishlistPage";
 import ProductPage from "./pages/ProductPage";
+import LoginPage from "./pages/LoginPage";
 function App() {
   return (
     <Routes>
@@ -12,6 +13,7 @@ function App() {
         <Route path="wishlist" element={<WishlistPage />} />
         <Route path="cart" element={<CartPage />} />
         <Route path="product/:id" element={<ProductPage />} />
+        <Route path="login" element={<LoginPage />} />
         <Route
           path="*"
           element={

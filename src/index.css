@@ -850,3 +850,71 @@ button {
   width: auto;
   padding: 10px 20px;
 }
+
+.auth-card {
+  max-width: 400px;
+  margin: 24px auto;
+  padding: 24px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.auth-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 600;
+}
+
+.auth-form input {
+  padding: 10px 12px;
+  border: 1px solid #d4d4d8;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.auth-form button:disabled {
+  background: #c4b5fd;
+  cursor: wait;
+}
+
+.auth-message {
+  margin: 0;
+  color: #dc2626;
+}
+
+.auth-switch {
+  margin: 16px 0 0;
+  text-align: center;
+}
+
+.link-button {
+  display: inline;
+  width: auto;
+  padding: 0;
+  background: none;
+  color: var(--brand);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.site-header nav .nav-button {
+  width: auto;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.site-header nav .nav-button:hover {
+  background: var(--brand-soft);
+}
