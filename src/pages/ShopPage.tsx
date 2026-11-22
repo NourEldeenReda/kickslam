@@ -1,7 +1,6 @@
 import { useMemo, useState } from "react";
 import ProductCard from "../components/ProductCard";
 import Filters from "../components/Filters";
-import { products } from "../data/products";
 import Hero from "../components/Hero";
 import {
   defaultFilters,
@@ -9,12 +8,17 @@ import {
   type Filters as FiltersState,
 } from "../utils";
 import { useStore } from "../context/useStore";
+import { useProducts } from "../context/useProducts";
 
 function ShopPage() {
   const { wishlist, toggleWishlist } = useStore();
+  const { products, loading, error, reload } = useProducts();
   const [filters, setFilters] = useState<FiltersState>(defaultFilters);
   const [filtersOpen, setFiltersOpen] = useState(false);
-  const visible = useMemo(() => filterProducts(products, filters), [filters]);
+  const visible = useMemo(
+    () => filterProducts(products, filters),
+    [products, filters],
+  );
 
   const activeCount =
     filters.categories.length +
@@ -48,17 +52,34 @@ function ShopPage() {
         </aside>
 
         <section className="shop-main">
-          {visible.length === 0 && <p>No shoes match your filters.</p>}
-          <div className="grid">
-            {visible.map((p) => (
-              <ProductCard
-                key={p.id}
-                product={p}
-                wished={wishlist.includes(p.id)}
-                onToggleWish={toggleWishlist}
-              />
-            ))}
-          </div>
+          {loading ? (
+            <div className="grid" aria-busy="true" aria-label="Loading shoes">
+              {Array.from({ length: 8 }, (_, i) => (
+                <div key={i} className="card skeleton" />
+              ))}
+            </div>
+          ) : error ? (
+            <div className="notice" role="alert">
+              <p>Couldn't load the shoes: {error}</p>
+              <button type="button" onClick={reload}>
+                Try again
+              </button>
+            </div>
+          ) : (
+            <>
+              {visible.length === 0 && <p>No shoes match your filters.</p>}
+              <div className="grid">
+                {visible.map((p) => (
+                  <ProductCard
+                    key={p.id}
+                    product={p}
+                    wished={wishlist.includes(p.id)}
+                    onToggleWish={toggleWishlist}
+                  />
+                ))}
+              </div>
+            </>
+          )}
         </section>
       </div>
     </>

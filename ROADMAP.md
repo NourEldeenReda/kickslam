@@ -24,20 +24,22 @@
 
 ## Phase 3: Fresh design
 
-- [ ] Card button says "Add to cart" and opens a quick-add popup (photo, name, size picker, price, Cancel / Add to cart, link to full details)
-- [ ] Show the product image on each cart line, not just the title
-- [ ] Header with logo, search, cart and wishlist counters
-- [ ] Hero banner and footer
-- [ ] Consistent colours and fonts
-- [ ] Mobile-friendly layout
-- [ ] Loading and empty states
+- [x] Card button says "Add to cart" and opens a quick-add popup (photo, name, size picker, price, Cancel / Add to cart, link to full details)
+- [x] Show the product image on each cart line, not just the title
+- [x] Header with logo and cart and wishlist counters
+- [ ] Search box in the header
+- [x] Hero banner and footer
+- [x] Consistent colours and fonts
+- [x] Mobile-friendly layout
+- [x] Empty states (cart, wishlist, no matches, page not found)
 
 ## Phase 4: Backend with Supabase
 
 - [ ] Database: products, wishlist, cart, orders
 - [ ] Import product data
-- [ ] Signup, login, logout
+- [ ] Signup, login, logout (login page and route)
 - [ ] Cart and wishlist saved per user
+- [ ] Loading states while data loads
 
 ## Phase 5: Checkout and orders
 
@@ -49,6 +51,8 @@
 
 - [ ] Host shoe images ourselves
 - [ ] Environment variables for Supabase keys
+- [ ] SPA rewrite rule so refreshing on /cart doesn't 404
 - [ ] Deploy on Vercel, Netlify, or Cloudflare Pages
+- [ ] Test on a real phone
 - [ ] Check current free-tier limits
 - [ ] Write the README

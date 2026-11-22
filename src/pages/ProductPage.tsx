@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router";
-import { products } from "../data/products";
+import { useProducts } from "../context/useProducts";
 import { sizesByCategory } from "../data/sizes";
 import { finalPrice, formatPrice } from "../utils";
 import { useStore } from "../context/useStore";
@@ -8,11 +8,12 @@ import { useStore } from "../context/useStore";
 function ProductPage() {
   const { id } = useParams();
   const { wishlist, addToCart, toggleWishlist } = useStore();
+  const { products, loading } = useProducts();
   const [size, setSize] = useState<number | null>(null);
   const [added, setAdded] = useState(false);
 
   const product = products.find((p) => p.id === Number(id));
-
+  if (loading) return <p>Loading...</p>;
   if (!product) {
     return (
       <p>

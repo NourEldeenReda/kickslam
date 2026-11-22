@@ -1,5 +1,5 @@
 :root {
-  --brand: #6d28d9;
+  --brand: #27da95;
   --brand-soft: #ede9fe;
   --ink: #111827;
   --muted: #6b7280;
@@ -816,4 +816,37 @@ button {
     padding: 16px;
     gap: 16px;
   }
+}
+
+.skeleton {
+  height: 340px;
+  background: linear-gradient(90deg, #eee 25%, #f6f6f6 37%, #eee 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
+}
+
+.notice {
+  padding: 24px;
+  background: white;
+  border-radius: 12px;
+}
+
+.notice button {
+  width: auto;
+  padding: 10px 20px;
 }

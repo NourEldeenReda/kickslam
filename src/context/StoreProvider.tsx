@@ -1,11 +1,12 @@
 import { useMemo, type ReactNode } from "react";
-import { products } from "../data/products";
+import { useProducts } from "./useProducts";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { finalPrice } from "../utils";
 import type { CartEntry, CartItem, Product } from "../types";
 import { StoreContext, type StoreValue } from "./StoreContext";
 
 export function StoreProvider({ children }: { children: ReactNode }) {
+  const { products } = useProducts();
   const [entries, setEntries] = useLocalStorage<CartEntry[]>(
     "kickslam-cart-v3",
     [],
@@ -23,14 +24,14 @@ export function StoreProvider({ children }: { children: ReactNode }) {
           ? [{ product, size: entry.size, quantity: entry.quantity }]
           : [];
       }),
-    [entries],
+    [entries, products],
   );
 
   const total = items.reduce(
     (sum, item) => sum + finalPrice(item.product) * item.quantity,
     0,
   );
-  const cartCount = items.reduce((count, item) => count + item.quantity, 0);
+  const cartCount = entries.reduce((count, e) => count + e.quantity, 0);
 
   function addToCart(product: Product, size: number) {
     setEntries((current) => {
